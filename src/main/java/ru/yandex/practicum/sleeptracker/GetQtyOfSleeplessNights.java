@@ -18,8 +18,8 @@ public class GetQtyOfSleeplessNights implements Function<List<SleepingSession>, 
         ).getDays();
         totalSleeplessNights += totalNights - sleepingSessions.stream()
                 .filter(sleepingSession -> (sleepingSession
-                        .getStartDateTime().getDayOfMonth() != sleepingSession.getFinishDateTime().
-                        getDayOfMonth()) || (sleepingSession.getStartDateTime().getHour() < 6))
+                        .getStartDateTime().getDayOfMonth() != sleepingSession.getFinishDateTime()
+                        .getDayOfMonth()) || (sleepingSession.getStartDateTime().getHour() < 6))
                 .count();
         return new SleepAnalysisResult("Количество бессонных ночей:", totalSleeplessNights);
     }
