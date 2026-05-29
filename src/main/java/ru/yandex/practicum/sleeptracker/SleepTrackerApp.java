@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.function.Function;
 
 public class SleepTrackerApp {
-
     public static void main(String[] args) throws RuntimeException {
         List<Function<List<SleepingSession>, SleepAnalysisResult>> functions = new ArrayList<>();
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(args[0]))) {
             List<String> lines = bufferedReader.lines()
                     .toList();

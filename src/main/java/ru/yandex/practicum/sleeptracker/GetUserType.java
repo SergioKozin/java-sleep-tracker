@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.function.Function;
 
 public class GetUserType implements Function<List<SleepingSession>, SleepAnalysisResult> {
+    static final int ELEVEN_HOURS_PM = 23;
+    static final int SIX_HOURS_AM = 6;
+    static final int NINE_HOURS_AM = 9;
+    static final int SEVEN_HOURS_AM = 7;
+    static final int ZERO_MINUTE = 0;
+
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sleepingSessions) {
 
@@ -15,11 +21,11 @@ public class GetUserType implements Function<List<SleepingSession>, SleepAnalysi
                                                 sleepingSession.getStartDateTime().getDayOfMonth()
                                                         != sleepingSession.getFinishDateTime().getDayOfMonth()
                                         )
-                                                && (sleepingSession.getStartDateTime().getHour() == 23)
-                                                && (sleepingSession.getStartDateTime().getMinute() > 0))
-                                        || (sleepingSession.getStartDateTime().getHour() < 6)
+                                                && (sleepingSession.getStartDateTime().getHour() == ELEVEN_HOURS_PM)
+                                                && (sleepingSession.getStartDateTime().getMinute() > ZERO_MINUTE))
+                                        || (sleepingSession.getStartDateTime().getHour() < SIX_HOURS_AM)
                         )
-                                && (sleepingSession.getFinishDateTime().getHour() >= 9)
+                                && (sleepingSession.getFinishDateTime().getHour() >= NINE_HOURS_AM)
                 )
                 .count();
 
@@ -31,9 +37,9 @@ public class GetUserType implements Function<List<SleepingSession>, SleepAnalysi
                                                 sleepingSession.getStartDateTime().getDayOfMonth()
                                                         != sleepingSession.getFinishDateTime().getDayOfMonth()
                                         )
-                                                && (sleepingSession.getStartDateTime().getHour() < 23)
+                                                && (sleepingSession.getStartDateTime().getHour() < ELEVEN_HOURS_PM)
                                 )
-                                        && (sleepingSession.getFinishDateTime().getHour() < 7)
+                                        && (sleepingSession.getFinishDateTime().getHour() < SEVEN_HOURS_AM)
                         )
                 )
                 .count();
@@ -44,7 +50,7 @@ public class GetUserType implements Function<List<SleepingSession>, SleepAnalysi
                                 sleepingSession.getStartDateTime().getDayOfMonth()
                                         != sleepingSession.getFinishDateTime().getDayOfMonth()
                         )
-                                || (sleepingSession.getStartDateTime().getHour() < 6)
+                                || (sleepingSession.getStartDateTime().getHour() < SIX_HOURS_AM)
                 )
                 .count() - qtyOwlSessions - qtyLarkSessions;
 
